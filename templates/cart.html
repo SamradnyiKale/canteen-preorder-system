@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f6f6f6;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background: #e23744;
+            color: white;
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .item-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .token {
+            color: #e23744;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .row {
+            margin: 10px 0;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            background: #e23744;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 2px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #c92d3a;
+        }
+
+        .qty {
+            margin: 0 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .status {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        input {
+            padding: 6px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .total-box {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .total {
+            color: green;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            margin-top: 15px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🛒 Your Orders</h1>
+
+<div class="container">
+
+{% for item in cart %}
+<div class="box">
+
+    <div class="item-title">{{ item.item }}</div>
+    <div class="token">Token No: {{ item.token }}</div>
+
+    <div class="row">
+        Qty:
+        <a href="/dec/{{ item.item }}" class="btn">−</a>
+        <span class="qty">{{ item.qty }}</span>
+        <a href="/inc/{{ item.item }}" class="btn">+</a>
+    </div>
+
+    <div class="row">
+        Price: ₹{{ item.price }} × {{ item.qty }}
+    </div>
+
+    <div class="row">
+        Status:
+        {% if item.status == "Completed" %}
+            <span class="status" style="color: green;">Completed</span>
+        {% else %}
+            <span class="status" style="color: orange;">Pending</span>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <a href="/status/{{ item.item }}" class="btn">Mark Completed</a>
+    </div>
+
+    <div class="row">
+        <form action="/instruction/{{ item.item }}" method="POST">
+            <input type="text" name="instruction" placeholder="Add instruction">
+            <button type="submit" class="btn">Save</button>
+        </form>
+    </div>
+
+    <div class="row">
+        <b>Note:</b> {{ item.instruction if item.instruction else "No instruction" }}
+    </div>
+
+</div>
+{% endfor %}
+
+<div class="total-box">
+    <div class="total">Total Bill: ₹{{ total }}</div>
+
+    <a href="/" class="btn back-btn">⬅ Back to Menu</a>
+</div>
+
+</div>
+
+</body>
+</html>

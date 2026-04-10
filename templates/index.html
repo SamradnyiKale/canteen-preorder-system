@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canteen</title>
+
+    <style>
+        body { font-family: Arial; background: #f8f8f8; }
+
+        .header {
+            background: #e23744;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .menu {
+            width: 70%;
+            margin: auto;
+        }
+
+        .item {
+            display: flex;
+            background: white;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .btn {
+            background: #e23744;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .top-btn {
+            text-align: right;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header" style="font-size:35px; padding:25px;">
+    🍔 Canteen Menu
+</div>
+
+<div class="top-btn">
+    <a href="/cart" class="btn">🛒 View Cart</a>
+</div>
+
+<div class="menu">
+    {% for category in menu %}
+        <h2>{{ category }}</h2>
+
+        {% for item in menu[category] %}
+        <div class="item">
+            <img src="{{ url_for('static', filename='images/' + menu[category][item].image) }}">
+            
+            <div>
+                <h3>{{ item }}</h3>
+                <p>₹{{ menu[category][item].price }}</p>
+            </div>
+
+            <a href="/add/{{ item }}" class="btn">Add to Cart</a>
+        </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+</body>
+</html>

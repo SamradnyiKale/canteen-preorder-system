@@ -10,14 +10,15 @@ token_counter = 100
 
 menu = {
     "Sandwiches": {
-        "Veg Sandwich": {"price": 50, "image": "veg_sandwich.jpg"},
+        "Veg Sandwich": {"price": 50, "image": "veg sandwich.jpg"},
         "Grilled Sandwich": {"price": 70, "image": "grilled_sandwich.jpg"},
         "Paneer Sandwich": {"price": 90, "image": "paneer_sandwich.jpg"},
+        "Aloo cheese Sandwich": {"price": 80, "image": "aloo_cheese_sandwich.jpg"},
     },
 
     "Burgers": {
         "Veg Burger": {"price": 60, "image": "veg_burger.jpg"},
-        "Cheese Burger": {"price": 80, "image": "cheese_burger.jpg"},
+        "Cheese Burger": {"price": 80, "image": "cheese burger.jpg"},
     },
 
     "Pizza": {
@@ -30,19 +31,38 @@ menu = {
         "Plain Dosa": {"price": 40, "image": "plain_dosa.jpg"},
         "Masala Dosa": {"price": 70, "image": "masala_dosa.jpg"},
         "Cheese Dosa": {"price": 90, "image": "cheese_dosa.jpg"},
+        "Rava Dosa": {"price": 50, "image": "rava_dosa.jpg"},
+        "Medu Vada": {"price": 30, "image": "meduvada.jpg"},
     },
 
     "Snacks": {
         "Vada Pav": {"price": 20, "image": "vadapav.jpg"},
         "Samosa": {"price": 15, "image": "samosa.jpg"},
+        "Omelette": {"price": 30, "image": "omelette.jpg"},
+        "misal Pav": {"price": 50, "image": "misal_pav.jpg"},
+        "Aloo paratha": {"price": 40, "image": "aloo_paratha.jpg"},
     },
+    "Garlic Bread": {
+        "Garlic Bread": {"price": 80, "image": "garlic_bread.jpg"},
+        "Cheese Garlic Bread": {"price": 100, "image": "cheese_garlic_bread.jpg"},
+    },          
 
     "Maggi": {
         "Plain Maggi": {"price": 40, "image": "plain_maggi.jpg"},
         "Cheese Maggi": {"price": 60, "image": "cheese_maggi.jpg"},
-    }
-}
+    },
+    "Juices": {
+        "Orange Juice": {"price": 50, "image": "orange_juice.jpg"},
+        "Apple Juice": {"price": 50, "image": "apple_juice.jpg"},
+        "Mango Juice": {"price": 60, "image": "mango_juice.jpg"},
+    },
+    "Pasta": {
+        "White Pasta": {"price": 100, "image": "white_sauce.jpg"},
+        "Red Pasta": {"price": 100, "image": "red_sauce.jpg"},
+    },
 
+
+}
 
 @app.route("/")
 def index():
@@ -113,4 +133,4 @@ def view_cart():
     return render_template("cart.html", cart=cart, total=total, final=final, discount=discount)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
